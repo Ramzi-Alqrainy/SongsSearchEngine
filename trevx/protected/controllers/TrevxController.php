@@ -18,13 +18,11 @@ class TrevxController extends Controller
 		$params['mm'] = isset($_GET['mm']) ? $_GET['mm'] : '75%';
 		$params['sort'] = isset($_GET['sort']) ? $_GET['sort'] : null;
 		if(isset($_GET['sort'])){
-			switch(isset($_GET['sort'])){
-				case "song_title asc":
-					$params['sort'] = "song_title_str asc";
-					break;
-				case "song_title desc":
-					$params['sort'] = "song_title_str desc";
-					break;
+                        if($_GET['sort']=='song_title asc'){
+				$params['sort'] = "song_title_str asc";
+			}
+			if($_GET['sort']=='song_title desc'){
+ 				$params['sort'] = "song_title_str desc";
 			}
 		}
 		if(isset($_GET['show_facet'])){
