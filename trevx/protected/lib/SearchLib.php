@@ -198,7 +198,7 @@ include('I18N/Arabic.php');
             foreach ($facetd_fields as $facet => $type) {
                 if (isset($results->facet_counts->facet_fields->$facet)) {
                     foreach ($results->facet_counts->facet_fields->$facet as $tag => $count) {
-                    	$facetd_search[$facet][] = array('tag'=>$tag,"count"=>$count);
+                    	$facetd_search[$type][] = array('tag'=>$tag,"count"=>$count);
                     }
                 }
             }
