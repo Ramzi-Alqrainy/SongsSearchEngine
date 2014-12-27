@@ -841,6 +841,16 @@
        <str name="echoParams">explicit</str>
        <int name="rows">10</int>
        <str name="df">text</str>
+ 	  <!-- Spell checking defaults -->
+       <str name="spellcheck">on</str>
+       <str name="spellcheck.extendedResults">false</str>       
+       <str name="spellcheck.count">5</str>
+       <str name="spellcheck.alternativeTermCount">2</str>
+       <str name="spellcheck.maxResultsForSuggest">5</str>       
+       <str name="spellcheck.collate">true</str>
+       <str name="spellcheck.collateExtendedResults">true</str>  
+       <str name="spellcheck.maxCollationTries">5</str>
+       <str name="spellcheck.maxCollations">3</str>           
      </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
@@ -888,12 +898,14 @@
          list can either be overridden completely, or components can be
          prepended or appended to the default list.  (see below)
       -->
-    <!--
-       <arr name="components">
-         <str>nameOfCustomComponent1</str>
-         <str>nameOfCustomComponent2</str>
-       </arr>
-      -->
+       
+
+
+     <!-- append spellchecking to our list of components -->
+     <arr name="last-components">
+       <str>spellcheck</str>
+     </arr>
+      
     </requestHandler>
 
   <!-- A request handler that returns indented JSON by default -->
@@ -1311,7 +1323,7 @@
      -->
   <searchComponent name="spellcheck" class="solr.SpellCheckComponent">
 
-    <str name="queryAnalyzerFieldType">text_general</str>
+    <str name="queryAnalyzerFieldType">String</str>
 
     <!-- Multiple "Spell Checkers" can be declared and used by this
          component
@@ -1320,7 +1332,7 @@
     <!-- a spellchecker built from a field of the main index -->
     <lst name="spellchecker">
       <str name="name">default</str>
-      <str name="field">text</str>
+      <str name="field">autocomplete_mul</str>
       <str name="classname">solr.DirectSolrSpellChecker</str>
       <!-- the spellcheck distance measure used, the default is the internal levenshtein -->
       <str name="distanceMeasure">internal</str>
@@ -1345,7 +1357,7 @@
     <lst name="spellchecker">
       <str name="name">wordbreak</str>
       <str name="classname">solr.WordBreakSolrSpellChecker</str>      
-      <str name="field">name</str>
+      <str name="field">autocomplete_mul</str>
       <str name="combineWords">true</str>
       <str name="breakWords">true</str>
       <int name="maxChanges">10</int>
